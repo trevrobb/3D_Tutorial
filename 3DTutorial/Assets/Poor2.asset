@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9da8cd8114942f46b423adbe3845ce5, type: 3}
+  m_Name: Poor2
+  m_EditorClassIdentifier: 
+  NPCAvatar: {fileID: 2800000, guid: e48e06eef4432dc46a55a6307f6f8a10, type: 3}
+  DialogSlides:
+  - After I left the manual labor factory, I too
+  - had no money
+  - However, you need some to buy food

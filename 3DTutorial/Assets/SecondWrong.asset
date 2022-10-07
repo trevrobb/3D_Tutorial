@@ -15,4 +15,4 @@ MonoBehaviour:
   NPCAvatar: {fileID: 2800000, guid: e48e06eef4432dc46a55a6307f6f8a10, type: 3}
   DialogSlides:
   - Processing data....
-  - Incorrect!
+  - You have bought food worth 10 coins

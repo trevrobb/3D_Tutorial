@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using TMPro.EditorUtilities;
 using UnityEditor.Timeline;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,23 @@ public class Player : MonoBehaviour
     float _currentTilt = 0f;
     [SerializeField] float _moveSpeed = 5f;
     [SerializeField] RuntimeData _runtimeData;
+    float jumpAmount = 10;
+    public float playerMoney = 0;
+    [SerializeField] GameObject coin;
+    public static Player instance;
+ 
+    bool isGround = true;
+    float groundY = 0.4f;
+    Vector3 velocity = Vector3.zero;
+    float gravity = 15f;
+    [SerializeField] TextMeshProUGUI _moneyText;
+
+    Vector3 moveDirection;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -26,6 +44,7 @@ public class Player : MonoBehaviour
 
         }
         
+
 
     }
 
@@ -44,10 +63,24 @@ public class Player : MonoBehaviour
     }
     void Movement()
     {
-        Vector3 sidewaysMove = transform.right * Input.GetAxis("Horizontal") * Time.deltaTime;
-        Vector3 forwardMove = transform.forward * Input.GetAxis("Vertical") * Time.deltaTime;
-        Vector3 move = sidewaysMove + forwardMove;
+       
+        if (GetComponent<CharacterController>().isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
 
-        GetComponent<CharacterController>().Move(move * _moveSpeed);
+            moveDirection *= _moveSpeed;
+            if (Input.GetButton("Jump"))
+                moveDirection.y = jumpAmount;
+        }
+        moveDirection.y -= gravity * Time.deltaTime;
+        GetComponent<CharacterController>().Move(moveDirection * Time.deltaTime);
+
+    }
+    
+    public void IncreaseScore()
+    {
+        playerMoney += 10;
+        _moneyText.text = "Money: " + playerMoney.ToString();
     }
 }

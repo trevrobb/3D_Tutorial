@@ -15,6 +15,6 @@ MonoBehaviour:
   NPCAvatar: {fileID: 2800000, guid: 45aa0ac12d2d6d548969b5fffae47edf, type: 3}
   DialogSlides:
   - Hey!
-  - Any of these catch your eye?
-  - Face the one you would like
-  - and click!
+  - Buy my food
+  - If you are poor
+  - Get away

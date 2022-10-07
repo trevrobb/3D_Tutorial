@@ -10,7 +10,10 @@ public class FoodQuiz : MonoBehaviour
 
     [SerializeField] Dialogue _incorrectChoiceDialogue;
 
+    [SerializeField] Dialogue _tooPoor;
+
     [SerializeField] GameObject _correctFood;
+    [SerializeField] Player _player;
     void Start()
     {
         
@@ -30,16 +33,28 @@ public class FoodQuiz : MonoBehaviour
     public IEnumerator FoodSelected(GameObject food)
     {
         yield return new WaitForEndOfFrame();
-        if (food == _correctFood)
+        if (food == _correctFood && Player.instance.playerMoney >= 50)
         {
             GameEvents.InvokeDialogInitiated(_correctChoiceDialogue);
+            Player.instance.playerMoney -= 50;
+            Destroy(food);
         }
-        else
+        else if (Player.instance.playerMoney >= 10 && food != _correctFood)
         {
             GameEvents.InvokeDialogInitiated(_incorrectChoiceDialogue);
+            Player.instance.playerMoney -= 10;
+            Destroy(food);
+        }
+        else if (Player.instance.playerMoney >= 10 && food == _correctFood)
+        {
+            GameEvents.InvokeDialogInitiated(_tooPoor);
+        }
+        else if (Player.instance.playerMoney < 10)
+        {
+            GameEvents.InvokeDialogInitiated(_tooPoor);
         }
 
-        Destroy(food);
+        
         
     }
 }
